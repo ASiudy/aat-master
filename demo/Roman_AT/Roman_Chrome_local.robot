@@ -6,14 +6,14 @@ Library  String
 
 *** Variables ***
 ${browser}  chrome
-#${remote_url}  http://saucelabs0000000000001:edb2ca13-8de8-4e29-b7b4-d19e88bb327b@ondemand.saucelabs.com:80/wd/hub
-#${desired_capabilities}  name:Roman_main_Win+Chrome,platform:Windows 10,browserName:chrome,version:60.0
+${remote_url}  http://adam1355:VdvLpbpxMuFKuA8qVAqF@hub.browserstack.com/wd/hub
+${desired_capabilities}  browser:${BROWSER},browser_version:65.0,os:Windows,os_version:10,browserstack.selenium_version:3.6.0
 ${signup_page_pat}  https://team@arabel.la:poqwlkas0912@roman-pa-dev.arabel.la/
 ${zip_code_field}  id=zipcode
 ${normal_flow}  xpath=(//button[@type='submit'])[2]
 ${pat_email}  automation+03042018-1427@ydtech.co
 ${user_login}  automation+ro
-${firstname}  Automation-16
+${firstname}  Automation-17
 #dodać do usera godzinę lub minutę np automation+(time)@ydtech.co
 ${email_id}  xpath=(//input[@name='answer'])[2]
 ${consent_to_telemedicine_laws}  css=label.checkbox-label
@@ -575,7 +575,7 @@ RO_NY_Sild80x4_Q_11r_PHY_onlinevisit
 
 *** Keywords ***
 Begin web test pat2
-    open browser  ${signup_page_pat}  ${browser}
+    open browser  ${signup_page_pat}  ${browser}  remote_url=${remote_url}  desired_capabilities=${desired_capabilities}
     sleep  1s
     go to  https://roman-pa-dev.arabel.la
     #driver.get("http://UserName:Password@roman-pa-dev.arabel.la");
@@ -611,9 +611,9 @@ What's your e-mail? 3th 1/2
 
 Generate usermail+1
     ${get_number}=  Get File  UserLogin.txt
-    ${user_login}=  Evaluate  "automation+ro" + '${${get_number}+1}' + "-pa@ydtech.co"
+    ${user_login}=  Evaluate  "automation+ro" + '${${get_number}+10}' + "-pa@ydtech.co"
     Input text  ${email_id}  ${user_login}
-    ${NextUserNo}=  Evaluate  '${EMPTY}' + '${${get_number}+1}'
+    ${NextUserNo}=  Evaluate  '${EMPTY}' + '${${get_number}+10}'
     Log to console   ${NextUserNo}
     Run keyword if  '${NextUserNo}' != 'user'   write_user_login  ${NextUserNo}
 
@@ -1115,7 +1115,7 @@ Review and payment 73th
 #---------------------PHY-------------------
 
 Begin Web test phy
-    open browser  ${signup_page_phy}  ${BROWSER}
+    open browser  ${signup_page_phy}  ${BROWSER}  remote_url=${remote_url}  desired_capabilities=${desired_capabilities}
     sleep  1s
     go to  https://roman-phy-dev.arabel.la
     maximize browser window
@@ -1588,3 +1588,4 @@ Confirm_your_pharmacy,_if_prescribed.
 
 End Web test
     close browser
+
